@@ -23,7 +23,10 @@ setup(name='ansible',
       url='http://ansibleworks.com/',
       license='GPLv3',
       install_requires=['paramiko', 'jinja2', "PyYAML"],
-      package_dir={ 'ansible': 'lib/ansible' },
+      package_dir={
+         'ansible': 'lib/ansible',
+         'ansiblecmds': './library'
+      },
       packages=[
          'ansible',
          'ansible.utils',
@@ -44,5 +47,5 @@ setup(name='ansible',
          'bin/ansible-pull',
          'bin/ansible-doc'
       ],
-      data_files=data_files
+      package_data={ 'ansiblecmds': data_files },
 )
