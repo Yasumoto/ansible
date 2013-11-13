@@ -25,7 +25,7 @@ setup(name='ansible',
       install_requires=['paramiko', 'jinja2', "PyYAML"],
       package_dir={
          'ansible': 'lib/ansible',
-         'ansiblecmds': './library'
+         'ansiblecmds': 'library',
       },
       packages=[
          'ansible',
@@ -39,7 +39,25 @@ setup(name='ansible',
          'ansible.runner.connection_plugins',
          'ansible.runner.filter_plugins',
          'ansible.callback_plugins',
-         'ansible.module_utils'
+         'ansible.module_utils',
+         'ansiblecmds',
+         'ansiblecmds.cloud',
+         'ansiblecmds.commands',
+         'ansiblecmds.database',
+         'ansiblecmds.files',
+         'ansiblecmds.internal',
+         'ansiblecmds.inventory',
+         'ansiblecmds.messaging',
+         'ansiblecmds.monitoring',
+         'ansiblecmds.net_infrastructure',
+         'ansiblecmds.network',
+         'ansiblecmds.notification',
+         'ansiblecmds.packaging',
+         'ansiblecmds.source_control',
+         'ansiblecmds.system',
+         'ansiblecmds.utilities',
+         'ansiblecmds.web_infrastructure',
+
       ],
       scripts=[
          'bin/ansible',
@@ -47,5 +65,4 @@ setup(name='ansible',
          'bin/ansible-pull',
          'bin/ansible-doc'
       ],
-      package_data={ 'ansiblecmds': data_files },
 )
