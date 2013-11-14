@@ -549,6 +549,7 @@ def default(value, function):
 def _gitinfo():
     ''' returns a string containing git branch, commit id and commit date '''
     result = None
+    print "HOLY HELL REPO_PATH: %s" % __file__
     repo_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', '.git')
 
     if os.path.exists(repo_path):

@@ -15,11 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import os.path
-import sys
 import glob
 import imp
+import os
+import os.path
+import pkgutil
+import sys
+
 from ansible import constants as C
 from ansible import errors
 
@@ -84,6 +86,9 @@ class PluginLoader(object):
         if not hasattr(self, 'package_path'):
             m = __import__(self.package)
             parts = self.package.split('.')[1:]
+            #TODO(jsmith): Do we care about this?
+            #print "PRINT PATHS: %s" % m.__file__
+            #print "PKGUTIL VERSION: %s" % pkgutil.get_data('ansible', '__init__.py')
             self.package_path = os.path.join(os.path.dirname(m.__file__), *parts)
             paths.append(self.package_path)
             return paths

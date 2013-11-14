@@ -44,21 +44,22 @@ BOOLEANS = BOOLEANS_TRUE + BOOLEANS_FALSE
 # of an ansible module. The source of this common code lives
 # in lib/ansible/module_common.py
 
+import errno
+import grp
 import os
+import pkgutil
+import platform
+import pwd
 import re
 import shlex
+import shutil
+import stat
 import subprocess
 import sys
 import syslog
-import types
 import time
-import shutil
-import stat
 import traceback
-import grp
-import pwd
-import platform
-import errno
+import types
 
 try:
     import json
@@ -755,6 +756,7 @@ class AnsibleModule(object):
             else:
                 log_args[param] = self.params[param]
 
+        print "log_invocation FILE: %s" % __file__
         module = 'ansible-%s' % os.path.basename(__file__)
         msg = ''
         for arg in log_args:
@@ -766,6 +768,7 @@ class AnsibleModule(object):
 
         if (has_journal):
             journal_args = ["MESSAGE=%s %s" % (module, msg)]
+            print "HAS_JOURNAL FILE: %s" % __file__
             journal_args.append("MODULE=%s" % os.path.basename(__file__))
             for arg in log_args:
                 journal_args.append(arg.upper() + "=" + str(log_args[arg]))
