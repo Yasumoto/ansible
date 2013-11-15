@@ -270,11 +270,16 @@ class Connection(object):
             indata = None
         else:
             cmd += ["sftp"] + self.common_args + [host]
+            mkdir_first = "mkdir %s\n" % '/'.join(out_path.split('/')[:-1])
             indata = "put %s %s\n" % (pipes.quote(in_path), pipes.quote(out_path))
 
         p = subprocess.Popen(cmd, stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         self._send_password()
+
+        #TODO(jsmith): ermergerd, this needs to be fixed in cases where there isn't anything needed.
+        p.stdin.write(mkdir_first)
+
         stdout, stderr = p.communicate(indata)
 
         if p.returncode != 0:
